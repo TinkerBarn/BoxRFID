@@ -47,6 +47,7 @@ Version **1.1.0** focuses on stability, startup performance, and proper internat
 > Simply download the latest Windows EXE directly from the release page:
 >
 > 👉 **[BoxRFID v1.1.0 – Download Windows EXE](https://github.com/TinkerBarn/BoxRFID/releases/tag/v1.1.0)**
+>
 > **This release is recommended for all users due to major stability and startup improvements.**
 
 
