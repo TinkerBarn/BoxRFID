@@ -1,13 +1,46 @@
+/**
+ * BoxRFID – Filament Tag Manager
+ *
+ * Author: Tinkerbarn
+ * License: CC BY-NC-SA 4.0 (SPDX-License-Identifier: CC-BY-NC-SA-4.0)
+ */
+
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const fsp = fs.promises;
 const NFCService = require('./nfc-service');
 
+// Workaround for some Windows setups (AV / Controlled Folder Access) that can block Chromium cache writes.
+// This reduces noisy "Unable to create cache" errors and can help avoid rare startup issues.
+app.commandLine.appendSwitch('disable-gpu-shader-disk-cache');
+// Force Chromium disk cache into Electron userData to avoid restricted locations on some systems.
+app.commandLine.appendSwitch('disk-cache-dir', path.join(app.getPath('userData'), 'cache'));
+
 let mainWindow;
-const nfcService = new NFCService();
+let nfcService = null;
+
+function getNfcService() {
+  if (!nfcService) nfcService = new NFCService();
+  return nfcService;
+}
 
 let isBusy = false;
+
+function toMessageKey(err) {
+  const msg = (err && err.message) ? String(err.message) : String(err || '');
+  switch (msg) {
+    case 'Busy':
+      return 'busy';
+    case 'NFC_NOT_CONNECTED':
+      return 'nfcNotConnected';
+    case 'NFC_AUTH_FAILED':
+      return 'nfcAuthFailed';
+    default:
+      return 'unknownError';
+  }
+}
+
 
 // Auto-read state
 let autoEnabled = false;
@@ -35,8 +68,15 @@ function createMainWindow() {
     autoHideMenuBar: true
   });
 
-  mainWindow.loadFile('index.html');
+  mainWindow.loadFile(path.join(__dirname, 'index.html'));
   mainWindow.once('ready-to-show', () => mainWindow.show());
+
+  // If the renderer fails to load, the window may never become visible.
+  // Log the error and show the window as a fallback so users don't end up with a "headless" process.
+  mainWindow.webContents.on('did-fail-load', (_event, errorCode, errorDescription, validatedURL) => {
+    console.error('did-fail-load', { errorCode, errorDescription, validatedURL });
+    if (!mainWindow.isVisible()) mainWindow.show();
+  });
 
   if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools();
@@ -58,12 +98,12 @@ function startAutoLoop() {
       if (!autoEnabled) return;
       if (isBusy) return;
 
-      const uid = nfcService.getCurrentUID();
+      const uid = getNfcService().getCurrentUID();
       if (uid && uid !== lastAutoUID) {
         // New tag appeared or changed
         isBusy = true;
         try {
-          const data = await nfcService.readTag();
+          const data = await getNfcService().readTag();
           lastAutoUID = uid;
           sendAutoStatus({ present: true, tagData: data, error: null });
         } catch (err) {
@@ -94,37 +134,37 @@ function stopAutoLoop() {
 
 // IPC handlers: RFID
 ipcMain.handle('rfid-write', async (_event, { materialCode, colorCode, manufacturerCode }) => {
-  if (isBusy) return { success: false, message: 'Busy' };
+  if (isBusy) return { success: false, messageKey: 'busy' };
   isBusy = true;
   try {
-    await nfcService.writeTag(
+    await getNfcService().writeTag(
       parseInt(materialCode, 10),
       parseInt(colorCode, 10),
       parseInt(manufacturerCode || 1, 10)
     );
     return { success: true };
   } catch (err) {
-    return { success: false, message: err.message || String(err) };
+    return { success: false, messageKey: toMessageKey(err), details: err && err.message ? String(err.message) : String(err) };
   } finally {
     isBusy = false;
   }
 });
 
 ipcMain.handle('rfid-read', async () => {
-  if (isBusy) return { success: false, message: 'Busy' };
+  if (isBusy) return { success: false, messageKey: 'busy' };
   isBusy = true;
   try {
-    const data = await nfcService.readTag();
+    const data = await getNfcService().readTag();
     return { success: true, data };
   } catch (err) {
-    return { success: false, message: err.message || String(err) };
+    return { success: false, messageKey: toMessageKey(err), details: err && err.message ? String(err.message) : String(err) };
   } finally {
     isBusy = false;
   }
 });
 
 ipcMain.handle('rfid-status', () => {
-  return nfcService.getStatus();
+  return getNfcService().getStatus();
 });
 
 ipcMain.handle('rfid-auto', async (_event, { enable }) => {
@@ -132,12 +172,12 @@ ipcMain.handle('rfid-auto', async (_event, { enable }) => {
   if (autoEnabled) {
     startAutoLoop();
     // If a tag is already present, try a first read immediately
-    const uid = nfcService.getCurrentUID();
+    const uid = getNfcService().getCurrentUID();
     if (uid) {
       if (!isBusy) {
         isBusy = true;
         try {
-          const data = await nfcService.readTag();
+          const data = await getNfcService().readTag();
           lastAutoUID = uid;
           sendAutoStatus({ present: true, tagData: data, error: null });
         } catch (err) {

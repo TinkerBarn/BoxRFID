@@ -1,3 +1,10 @@
+<!--
+  BoxRFID – Filament Tag Manager
+
+  Author: Tinkerbarn
+  License: CC BY-NC-SA 4.0 (SPDX-License-Identifier: CC-BY-NC-SA-4.0)
+-->
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -485,11 +492,11 @@
                     </div>
                 </div>
 
-                <!-- Use Officiall_filase_list.cfg (store full path; validate on enable) -->
+                <!-- Use officiall_filas_list.cfg (store full path; validate on enable) -->
                 <div class="form-group">
                     <div class="checkbox-group">
                         <input type="checkbox" id="officialCfgCheck">
-                        <label for="officialCfgCheck" id="officialCfgLabel">Officiall_filase_list.cfg verwenden</label>
+                        <label for="officialCfgCheck" id="officialCfgLabel">officiall_filas_list.cfg verwenden</label>
                     </div>
                     <div id="officialCfgInfo" class="manufacturer-warning" style="display:none;">
                         <p id="officialCfgInfoText"></p>
@@ -519,9 +526,9 @@
         const translations = {
              de: {
                 appTitle: "BoxRFID – Filament Tag Manager",
-                manufacturerLabel: "Hersteller auswählen",
+                manufacturerLabel: "Hersteller",
                 manufacturerPlaceholder: "-- Hersteller auswählen --",
-                materialLabel: "Materialtyp auswählen",
+                materialLabel: "Material",
                 materialPlaceholder: "-- Material auswählen --",
                 colorLabel: "Farbe auswählen",
                 noColorSelected: "Keine Farbe ausgewählt",
@@ -544,7 +551,7 @@
                 resetManufacturersBtn: "Auf Werkseinstellung zurücksetzen",
                 materialFormTitle: "Material hinzufügen/bearbeiten",
                 manufacturerFormTitle: "Hersteller hinzufügen/bearbeiten",
-                manufacturerLabel: "Hersteller verwenden",
+                manufacturerUseLabel: "Hersteller verwenden",
                 manufacturerInfoText: "Diese Funktion findet derzeit keine Verwendung, da als Standard immer QIDI verwendet wird. Es ist möglich, dass diese Funktion zukünftig von QIDI unterstützt wird.",
                 saveSettingsBtn: "Einstellungen speichern",
                 saveMaterialBtn: "Speichern",
@@ -570,6 +577,11 @@
                 connectionError: "Keine Verbindung zum RFID-Reader",
                 writeError: "Fehler beim Schreiben:",
                 readError: "Fehler beim Lesen:",
+                busy: "Bitte warten…",
+                nfcNotConnected: "Keine Verbindung zum RFID-Reader",
+                nfcAuthFailed: "Authentifizierung fehlgeschlagen",
+                unknownError: "Unbekannter Fehler",
+
                 settingsSaved: "Einstellungen gespeichert!",
                 tagInfoTitle: "Gelesene Tag-Informationen:",
                 material: "Material:",
@@ -587,7 +599,7 @@
                 clearPrefsTitle: "Bestätigen",
                 clearPrefsMessage: "Möchten Sie wirklich die App‑Einstellungen zurücksetzen? Sprache, Auto‑Erkennung und Hersteller‑Verwendung werden auf Standard zurückgesetzt. Benutzerdefinierte Materialien/Hersteller bleiben erhalten.",
                 clearPrefsSuccess: "App‑Einstellungen zurückgesetzt.",
-                officialCfgLabel: "Officiall_filase_list.cfg verwenden",
+                officialCfgLabel: "officiall_filas_list.cfg verwenden",
                 officialCfgChooseBtn: "Datei wählen",
                 officialCfgReloadBtn: "Neu laden",
                 officialCfgPathPlaceholder: "Kein Pfad ausgewählt",
@@ -608,9 +620,9 @@
             },
             en: {
                 appTitle: "BoxRFID – Filament Tag Manager",
-                manufacturerLabel: "Select Manufacturer",
+                manufacturerLabel: "Manufacturer",
                 manufacturerPlaceholder: "-- Select Manufacturer --",
-                materialLabel: "Select Material Type",
+                materialLabel: "Material",
                 materialPlaceholder: "-- Select Material --",
                 colorLabel: "Select Color",
                 noColorSelected: "No color selected",
@@ -633,7 +645,7 @@
                 resetManufacturersBtn: "Reset to Defaults",
                 materialFormTitle: "Add/Edit Material",
                 manufacturerFormTitle: "Add/Edit Manufacturer",
-                manufacturerLabel: "Use Manufacturer",
+                manufacturerUseLabel: "Use Manufacturer",
                 manufacturerInfoText: "This function is currently not in use, as QIDI is always used as default. It is possible that this function will be supported by QIDI in the future.",
                 saveSettingsBtn: "Save Settings",
                 saveMaterialBtn: "Save",
@@ -659,6 +671,11 @@
                 connectionError: "No connection to RFID reader",
                 writeError: "Write error:",
                 readError: "Read error:",
+                busy: "Please wait…",
+                nfcNotConnected: "No connection to the RFID reader",
+                nfcAuthFailed: "Authentication failed",
+                unknownError: "Unknown error",
+
                 settingsSaved: "Settings saved!",
                 tagInfoTitle: "Read Tag Information:",
                 material: "Material:",
@@ -676,7 +693,7 @@
                 clearPrefsTitle: "Confirm",
                 clearPrefsMessage: "Do you really want to reset the app preferences? Language, Auto Detection and Manufacturer usage will be reset to defaults. Custom materials/manufacturers will be kept.",
                 clearPrefsSuccess: "App preferences reset.",
-                officialCfgLabel: "Use Officiall_filase_list.cfg",
+                officialCfgLabel: "Use officiall_filas_list.cfg",
                 officialCfgChooseBtn: "Choose File",
                 officialCfgReloadBtn: "Reload",
                 officialCfgPathPlaceholder: "No path selected",
@@ -697,9 +714,9 @@
             },
             es: {
                 appTitle: "BoxRFID – Filament Tag Manager",
-                manufacturerLabel: "Seleccionar Fabricante",
+                manufacturerLabel: "Fabricante",
                 manufacturerPlaceholder: "-- Seleccionar Fabricante --",
-                materialLabel: "Seleccionar Tipo de Material",
+                materialLabel: "Material",
                 materialPlaceholder: "-- Seleccionar Material --",
                 colorLabel: "Seleccionar Color",
                 noColorSelected: "Ningún color seleccionado",
@@ -722,7 +739,7 @@
                 resetManufacturersBtn: "Restablecer Valores Predeterminados",
                 materialFormTitle: "Añadir/Editar Material",
                 manufacturerFormTitle: "Añadir/Editar Fabricante",
-                manufacturerLabel: "Usar Fabricante",
+                manufacturerUseLabel: "Usar Fabricante",
                 manufacturerInfoText: "Esta función no está en uso actualmente, ya que siempre se usa QIDI como predeterminado. Es posible que esta función sea compatible con QIDI en el futuro.",
                 saveSettingsBtn: "Guardar Configuración",
                 saveMaterialBtn: "Guardar",
@@ -748,6 +765,11 @@
                 connectionError: "Sin conexión al lector RFID",
                 writeError: "Error de escritura:",
                 readError: "Error de lectura:",
+                busy: "Por favor espera…",
+                nfcNotConnected: "Sin conexión al lector RFID",
+                nfcAuthFailed: "Autenticación fallida",
+                unknownError: "Error desconocido",
+
                 settingsSaved: "¡Configuración guardada!",
                 tagInfoTitle: "Información de Etiqueta Leída:",
                 material: "Material:",
@@ -765,7 +787,7 @@
                 clearPrefsTitle: "Confirmar",
                 clearPrefsMessage: "¿Desea realmente restablecer las preferencias de la aplicación? El idioma, la detección automática y el uso de fabricante se restablecerán a los valores predeterminados. Se conservarán los materiales/fabricantes personalizados.",
                 clearPrefsSuccess: "Preferencias de la app restablecidas.",
-                officialCfgLabel: "Usar Officiall_filase_list.cfg",
+                officialCfgLabel: "Usar officiall_filas_list.cfg",
                 officialCfgChooseBtn: "Elegir archivo",
                 officialCfgReloadBtn: "Recargar",
                 officialCfgPathPlaceholder: "Ninguna ruta seleccionada",
@@ -786,9 +808,9 @@
             },
             pt: {
                 appTitle: "BoxRFID – Filament Tag Manager",
-                manufacturerLabel: "Selecionar Fabricante",
+                manufacturerLabel: "Fabricante",
                 manufacturerPlaceholder: "-- Selecionar Fabricante --",
-                materialLabel: "Selecionar Tipo de Material",
+                materialLabel: "Material",
                 materialPlaceholder: "-- Selecionar Material --",
                 colorLabel: "Selecionar Cor",
                 noColorSelected: "Nenhuma cor selecionada",
@@ -811,7 +833,7 @@
                 resetManufacturersBtn: "Restaurar Padrões",
                 materialFormTitle: "Adicionar/Editar Material",
                 manufacturerFormTitle: "Adicionar/Editar Fabricante",
-                manufacturerLabel: "Usar Fabricante",
+                manufacturerUseLabel: "Usar Fabricante",
                 manufacturerInfoText: "Esta função não está em uso atualmente, pois QIDI é sempre usado como padrão. É possível que esta função seja suportada pela QIDI no futuro.",
                 saveSettingsBtn: "Salvar Configurações",
                 saveMaterialBtn: "Salvar",
@@ -837,6 +859,11 @@
                 connectionError: "Sem conexão com o leitor RFID",
                 writeError: "Erro de escrita:",
                 readError: "Erro de leitura:",
+                busy: "Por favor, aguarde…",
+                nfcNotConnected: "Sem conexão com o leitor RFID",
+                nfcAuthFailed: "Falha na autenticação",
+                unknownError: "Erro desconhecido",
+
                 settingsSaved: "Configurações salvas!",
                 tagInfoTitle: "Informações da Tag Lida:",
                 material: "Material:",
@@ -854,7 +881,7 @@
                 clearPrefsTitle: "Confirmar",
                 clearPrefsMessage: "Deseja realmente redefinir as preferências do aplicativo? Idioma, detecção automática e uso de fabricante serão restaurados aos padrões. Materiais/fabricantes personalizados serão mantidos.",
                 clearPrefsSuccess: "Preferências do app redefinidas.",
-                officialCfgLabel: "Usar Officiall_filase_list.cfg",
+                officialCfgLabel: "Usar officiall_filas_list.cfg",
                 officialCfgChooseBtn: "Escolher arquivo",
                 officialCfgReloadBtn: "Recarregar",
                 officialCfgPathPlaceholder: "Nenhum caminho selecionado",
@@ -875,9 +902,9 @@
             },
             fr: {
                 appTitle: "BoxRFID – Filament Tag Manager",
-                manufacturerLabel: "Sélectionner Fabricant",
+                manufacturerLabel: "Fabricant",
                 manufacturerPlaceholder: "-- Sélectionner Fabricant --",
-                materialLabel: "Sélectionner le Type de Matériau",
+                materialLabel: "Matériau",
                 materialPlaceholder: "-- Sélectionner Matériau --",
                 colorLabel: "Sélectionner Couleur",
                 noColorSelected: "Aucune couleur sélectionnée",
@@ -900,7 +927,7 @@
                 resetManufacturersBtn: "Rétablir Valeurs par Défaut",
                 materialFormTitle: "Ajouter/Modifier Matériau",
                 manufacturerFormTitle: "Ajouter/Modifier Fabricant",
-                manufacturerLabel: "Utiliser Fabricant",
+                manufacturerUseLabel: "Utiliser Fabricant",
                 manufacturerInfoText: "Cette fonction n'est actuellement pas utilisée, car QIDI est toujours utilisé par défaut. Il est possible que cette fonction soit prise en charge par QIDI à l'avenir.",
                 saveSettingsBtn: "Enregistrer Paramètres",
                 saveMaterialBtn: "Enregistrer",
@@ -926,6 +953,11 @@
                 connectionError: "Aucune connexion au lecteur RFID",
                 writeError: "Erreur d'écriture:",
                 readError: "Erreur de lecture:",
+                busy: "Veuillez patienter…",
+                nfcNotConnected: "Aucune connexion au lecteur RFID",
+                nfcAuthFailed: "Échec de l’authentification",
+                unknownError: "Erreur inconnue",
+
                 settingsSaved: "Paramètres enregistrés!",
                 tagInfoTitle: "Informations Tag Lues:",
                 material: "Matériau:",
@@ -943,7 +975,7 @@
                 clearPrefsTitle: "Confirmer",
                 clearPrefsMessage: "Voulez‑vous vraiment réinitialiser les préférences de l’application ? La langue, la détection automatique et l’utilisation du fabricant seront rétablies par défaut. Les matériaux/fabricants personnalisés seront conservés.",
                 clearPrefsSuccess: "Préférences de l’appli réinitialisées.",
-                officialCfgLabel: "Utiliser Officiall_filase_list.cfg",
+                officialCfgLabel: "Utiliser officiall_filas_list.cfg",
                 officialCfgChooseBtn: "Choisir un fichier",
                 officialCfgReloadBtn: "Recharger",
                 officialCfgPathPlaceholder: "Aucun chemin sélectionné",
@@ -964,9 +996,9 @@
             },
             zh: {
                 appTitle: "QIDI RFID 标签读写器",
-                manufacturerLabel: "选择制造商",
+                manufacturerLabel: "制造商",
                 manufacturerPlaceholder: "-- 选择制造商 --",
-                materialLabel: "选择材料类型",
+                materialLabel: "材料",
                 materialPlaceholder: "-- 选择材料 --",
                 colorLabel: "选择颜色",
                 noColorSelected: "未选择颜色",
@@ -989,7 +1021,7 @@
                 resetManufacturersBtn: "恢复默认设置",
                 materialFormTitle: "添加/编辑材料",
                 manufacturerFormTitle: "添加/编辑制造商",
-                manufacturerLabel: "使用制造商",
+                manufacturerUseLabel: "使用制造商",
                 manufacturerInfoText: "此功能目前不使用，因为默认总是使用QIDI。未来可能QIDI会支持此功能。",
                 saveSettingsBtn: "保存设置",
                 saveMaterialBtn: "保存",
@@ -1015,6 +1047,11 @@
                 connectionError: "未连接到RFID读取器",
                 writeError: "写入错误:",
                 readError: "读取错误:",
+                busy: "请稍候…",
+                nfcNotConnected: "无法连接到 RFID 读卡器",
+                nfcAuthFailed: "认证失败",
+                unknownError: "未知错误",
+
                 settingsSaved: "设置已保存！",
                 tagInfoTitle: "读取的标签信息:",
                 material: "材料:",
@@ -1032,7 +1069,7 @@
                 clearPrefsTitle: "确认",
                 clearPrefsMessage: "是否确定要重置应用首选项？语言、自动检测和制造商使用将恢复为默认。自定义的材料/制造商将保留。",
                 clearPrefsSuccess: "首选项已重置。",
-                officialCfgLabel: "使用 Officiall_filase_list.cfg",
+                officialCfgLabel: "使用 officiall_filas_list.cfg",
                 officialCfgChooseBtn: "选择文件",
                 officialCfgReloadBtn: "重新加载",
                 officialCfgPathPlaceholder: "未选择路径",
@@ -1263,7 +1300,7 @@
             document.getElementById('materialFormTitle').textContent = t.materialFormTitle;
             document.getElementById('manufacturerFormTitle').textContent = t.manufacturerFormTitle;
 
-            if (elements.manufacturerUseLabel) elements.manufacturerUseLabel.textContent = t.manufacturerLabel;
+            if (elements.manufacturerUseLabel) elements.manufacturerUseLabel.textContent = t.manufacturerUseLabel || t.manufacturerLabel;
             document.getElementById('manufacturerInfoText').innerHTML = `<strong>${t.note}</strong> ${t.manufacturerInfoText}`;
 
             document.getElementById('saveMaterialBtn').textContent = t.saveMaterialBtn;
@@ -1590,6 +1627,15 @@
             setTimeout(() => { elements.status.style.display = 'none'; }, 5000);
         }
         function showLoading(show) { elements.loading.style.display = show ? 'block' : 'none'; }
+
+        function translateResultMessage(res) {
+            const t = translations[currentLanguage] || translations.en;
+            if (res && res.messageKey && t[res.messageKey]) return t[res.messageKey];
+            if (res && res.message) return String(res.message);
+            if (res && res.details) return String(res.details);
+            return t.unknownError || 'Unknown error';
+        }
+
 
         // Real connection polling (no simulation)
         async function pollConnectionStatus() {
@@ -1963,7 +2009,7 @@
                         colorCode: parseInt(colors[selectedColor], 10),
                         manufacturerCode: useManufacturer ? parseInt(selectedManufacturer || 1, 10) : 1
                     });
-                    if (!res || !res.success) throw new Error(res && res.message ? res.message : 'Unknown write error');
+                    if (!res || !res.success) throw new Error(translateResultMessage(res));
                     showStatus(t.writeSuccess, 'success');
                 } catch (error) {
                     showStatus(`${t.writeError} ${error.message || error}`, 'error');
@@ -1979,7 +2025,7 @@
                 try {
                     if (!window.electronAPI || !window.electronAPI.readTag) throw new Error(t.connectionError);
                     const res = await window.electronAPI.readTag();
-                    if (!res || !res.success) throw new Error(res && res.message ? res.message : 'Unknown read error');
+                    if (!res || !res.success) throw new Error(translateResultMessage(res));
                     showTagPopupFromData(res.data);
                 } catch (error) {
                     showStatus(`${t.readError} ${error.message || error}`, 'error');
