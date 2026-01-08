@@ -1,3 +1,10 @@
+/**
+ * BoxRFID – Filament Tag Manager
+ *
+ * Author: Tinkerbarn
+ * License: CC BY-NC-SA 4.0 (SPDX-License-Identifier: CC-BY-NC-SA-4.0)
+ */
+
 const { NFC } = require('nfc-pcsc');
 
 class NFCService {
@@ -51,7 +58,7 @@ class NFCService {
 
   // key sequence: Vendor (D3 F7 ...) then standard (FF ...)
   async _authenticateBlock(block = 4) {
-    if (!this.currentReader) throw new Error('NFC Reader nicht verbunden');
+    if (!this.currentReader) throw new Error('NFC_NOT_CONNECTED');
     const reader = this.currentReader;
     const KEY_TYPE_A = reader.KEY_TYPE_A || 0x60;
     const keys = [
@@ -67,11 +74,11 @@ class NFCService {
         lastErr = e;
       }
     }
-    throw lastErr || new Error('Authentifizierung fehlgeschlagen');
+    throw lastErr || new Error('NFC_AUTH_FAILED');
   }
 
   async readTag() {
-    if (!this.currentReader) throw new Error('NFC Reader nicht verbunden');
+    if (!this.currentReader) throw new Error('NFC_NOT_CONNECTED');
     return this._withLock(async () => {
       await this._authenticateBlock(4);
       const data = await this.currentReader.read(4, 16, 16);
@@ -83,7 +90,7 @@ class NFCService {
   }
 
   async writeTag(materialCode, colorCode, manufacturerCode = 1) {
-    if (!this.currentReader) throw new Error('NFC Reader nicht verbunden');
+    if (!this.currentReader) throw new Error('NFC_NOT_CONNECTED');
     return this._withLock(async () => {
       await this._authenticateBlock(4);
       const buf = Buffer.alloc(16, 0x00);

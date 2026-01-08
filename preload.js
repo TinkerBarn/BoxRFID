@@ -1,3 +1,10 @@
+/**
+ * BoxRFID – Filament Tag Manager
+ *
+ * Author: Tinkerbarn
+ * License: CC BY-NC-SA 4.0 (SPDX-License-Identifier: CC-BY-NC-SA-4.0)
+ */
+
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {

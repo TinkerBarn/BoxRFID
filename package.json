@@ -5,12 +5,14 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dev": "NODE_ENV=development electron .",
+    "dev": "cross-env NODE_ENV=development electron .",
     "build": "electron-builder",
     "build-win": "electron-builder --win",
     "build-linux": "electron-builder --linux",
     "build-all": "electron-builder --win --linux",
-    "dist": "npm run build"
+    "dist": "npm run build",
+    "rebuild-native": "electron-rebuild -f -w @pokusew/pcsclite",
+    "postinstall": "npm run rebuild-native"
   },
   "build": {
     "appId": "com.tinkerbarn.BoxRFID",
@@ -85,6 +87,8 @@
   "author": "Tinkerbarn",
   "license": "CC-BY-NC-SA-4.0",
   "devDependencies": {
+    "@electron/rebuild": "^4.0.2",
+    "cross-env": "^7.0.3",
     "electron": "^37.3.1",
     "electron-builder": "latest",
     "png-to-ico": "^3.0.1",
