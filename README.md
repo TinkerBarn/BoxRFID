@@ -3,7 +3,7 @@
 BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used by QIDI Box, a multi color System for QIDI Plus 4 and QIDI Q2 3D printers. It lets you set material, color, and manufacturer codes (not yet supported by QIDI Box, Maybe in future), read tags, and auto‑read when a tag is detected.
 
 - Platform: Windows (Electron)
-- Version: 1.0.0
+- Version: 1.1.0
 - License: CC BY‑NC‑SA 4.0
 
 ## Features
@@ -15,6 +15,27 @@ BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used
 - Support edit / delete filaments from Filament list and Vendor list
 - Uses PC/SC (nfc-pcsc) for reader support (tested with ACR122U)
 
+## What’s new in v1.1.0
+
+Version **1.1.0** focuses on stability, startup performance, and proper internationalization.
+
+### 🚀 Improvements
+- **Much faster startup** (window opens in ~2–3 seconds instead of 20–30 seconds)
+- **Reliable window opening** – app no longer runs headless in the background
+- **Persistent settings**  
+  Selected language, manufacturer usage, and preferences are now reliably restored on next startup
+- **Improved Windows compatibility**  
+  Chromium disk cache is redirected to Electron userData to avoid permission issues on locked-down systems
+
+### 🌍 Internationalization (i18n)
+- All NFC and status messages are now **fully localized**
+- No more mixed German/English messages when another language is selected
+- Consistent behavior across all supported languages (DE, EN, FR, ES, PT, ZH)
+
+### 🧩 Technical
+- Native modules are rebuilt correctly for the bundled Electron version
+- Improved startup robustness on systems with antivirus or Controlled Folder Access
+
 ## REQUIREMENTS
 - ACR122U USB reader/writer (i.e. https://www.amazon.com/ACR122U-Contactless-Reader-Lianshi-Writer/dp/B07DK9GX1N)
 - Mifare classic 1K tags (i.e. https://www.amazon.com/BABIQT-Sticker-Classic-Self-Adhesive-Stickers/dp/B0BZRS35CT)
@@ -25,9 +46,8 @@ BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used
 > You do **not** need to compile the code yourself!  
 > Simply download the latest Windows EXE directly from the release page:
 >
-> 👉 **[BoxRFID v1.0.0 – Download Windows EXE](https://github.com/TinkerBarn/BoxRFID/releases/tag/v1.0.0)**
->
-> This allows you to get started right away, without setting up a development environment.
+> 👉 **[BoxRFID v1.1.0 – Download Windows EXE](https://github.com/TinkerBarn/BoxRFID/releases/tag/v1.1.0)**
+> **This release is recommended for all users due to major stability and startup improvements.**
 
 
 ## HOW TO USE DIY RFID FILAMENT SPOOLS WITH THE QIDI BOX
