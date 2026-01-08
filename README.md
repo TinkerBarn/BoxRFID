@@ -182,8 +182,8 @@ npm run build-win
 
 After building, you will find the following files in the `dist\` folder:
 
-- `BoxRFID – Filament Tag Manager Setup 1.0.0.exe` (Windows installer)
-- `BoxRFID – Filament Tag Manager 1.0.0.exe` (portable, runs without installation)
+- `BoxRFID – Filament Tag Manager Setup <version>.exe` (Windows installer)
+- `BoxRFID – Filament Tag Manager <version>.exe` (portable, runs without installation)
 
 ---
 
