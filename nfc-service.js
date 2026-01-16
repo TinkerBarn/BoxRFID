@@ -13,15 +13,39 @@ class NFCService {
     this.isConnected = false;
     this.currentReader = null;
     this.lastUID = null;
+    this.lastError = null;
+    this.lastErrorCode = null;
+    this.lastErrorAt = null;
     this._busy = false;
 
     this._init();
+  }
+
+  _setError(err) {
+    if (!err) {
+      this.lastError = null;
+      this.lastErrorCode = null;
+      this.lastErrorAt = null;
+      return;
+    }
+    const msg = err && err.message ? String(err.message) : String(err);
+    this.lastError = msg;
+    const upper = msg.toUpperCase();
+    if (upper.includes('SCARD_E_NO_SERVICE') || upper.includes('SERVICE NOT RUNNING')) {
+      this.lastErrorCode = 'PCSC_SERVICE_NOT_RUNNING';
+    } else if (upper.includes('SCARD_E_NO_READERS_AVAILABLE') || upper.includes('NO READERS AVAILABLE')) {
+      this.lastErrorCode = 'NO_READERS';
+    } else {
+      this.lastErrorCode = 'UNKNOWN';
+    }
+    this.lastErrorAt = Date.now();
   }
 
   _init() {
     this.nfc.on('reader', (reader) => {
       this.currentReader = reader;
       this.isConnected = true;
+      this._setError(null);
 
       reader.on('card', (card) => {
         this.lastUID = card?.uid || null;
@@ -33,7 +57,9 @@ class NFCService {
         reader.card = null;
       });
 
-      reader.on('error', (_err) => {});
+      reader.on('error', (err) => {
+        this._setError(err);
+      });
       reader.on('end', () => {
         this.isConnected = false;
         this.currentReader = null;
@@ -41,10 +67,11 @@ class NFCService {
       });
     });
 
-    this.nfc.on('error', (_err) => {
+    this.nfc.on('error', (err) => {
       this.isConnected = false;
       this.currentReader = null;
       this.lastUID = null;
+      this._setError(err);
     });
   }
 
@@ -107,7 +134,10 @@ class NFCService {
       connected: this.isConnected,
       readerName: this.currentReader ? this.currentReader.reader.name : null,
       cardPresent: !!(this.currentReader && this.currentReader.card),
-      uid: this.lastUID
+      uid: this.lastUID,
+      errorCode: this.lastErrorCode,
+      errorMessage: this.lastError,
+      errorAt: this.lastErrorAt
     };
   }
 }

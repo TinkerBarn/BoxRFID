@@ -581,6 +581,9 @@
                 nfcNotConnected: "Keine Verbindung zum RFID-Reader",
                 nfcAuthFailed: "Authentifizierung fehlgeschlagen",
                 unknownError: "Unbekannter Fehler",
+                pcscServiceMissing: "Kein PC/SC-Dienst gefunden. Bitte NFC-/Smartcard-Treiber installieren und den Dienst starten.",
+                pcscNoReaders: "Kein RFID-Reader erkannt. Bitte Reader anschließen oder Treiber prüfen.",
+                pcscUnknownError: "NFC/PCSC-Fehler. Bitte Treiber prüfen.",
 
                 settingsSaved: "Einstellungen gespeichert!",
                 tagInfoTitle: "Gelesene Tag-Informationen:",
@@ -675,6 +678,9 @@
                 nfcNotConnected: "No connection to the RFID reader",
                 nfcAuthFailed: "Authentication failed",
                 unknownError: "Unknown error",
+                pcscServiceMissing: "PC/SC service not found. Please install NFC/Smartcard drivers and start the service.",
+                pcscNoReaders: "No RFID reader detected. Please connect a reader or check drivers.",
+                pcscUnknownError: "NFC/PCSC error. Please check drivers.",
 
                 settingsSaved: "Settings saved!",
                 tagInfoTitle: "Read Tag Information:",
@@ -769,6 +775,9 @@
                 nfcNotConnected: "Sin conexión al lector RFID",
                 nfcAuthFailed: "Autenticación fallida",
                 unknownError: "Error desconocido",
+                pcscServiceMissing: "Servicio PC/SC no encontrado. Instale los controladores NFC/Smartcard y arranque el servicio.",
+                pcscNoReaders: "No se detectó lector RFID. Conecte un lector o revise los controladores.",
+                pcscUnknownError: "Error NFC/PCSC. Revise los controladores.",
 
                 settingsSaved: "¡Configuración guardada!",
                 tagInfoTitle: "Información de Etiqueta Leída:",
@@ -863,6 +872,9 @@
                 nfcNotConnected: "Sem conexão com o leitor RFID",
                 nfcAuthFailed: "Falha na autenticação",
                 unknownError: "Erro desconhecido",
+                pcscServiceMissing: "Serviço PC/SC não encontrado. Instale os drivers NFC/Smartcard e inicie o serviço.",
+                pcscNoReaders: "Nenhum leitor RFID detectado. Conecte um leitor ou verifique os drivers.",
+                pcscUnknownError: "Erro NFC/PCSC. Verifique os drivers.",
 
                 settingsSaved: "Configurações salvas!",
                 tagInfoTitle: "Informações da Tag Lida:",
@@ -957,6 +969,9 @@
                 nfcNotConnected: "Aucune connexion au lecteur RFID",
                 nfcAuthFailed: "Échec de l’authentification",
                 unknownError: "Erreur inconnue",
+                pcscServiceMissing: "Service PC/SC introuvable. Installez les pilotes NFC/Smartcard et démarrez le service.",
+                pcscNoReaders: "Aucun lecteur RFID détecté. Branchez un lecteur ou vérifiez les pilotes.",
+                pcscUnknownError: "Erreur NFC/PCSC. Veuillez vérifier les pilotes.",
 
                 settingsSaved: "Paramètres enregistrés!",
                 tagInfoTitle: "Informations Tag Lues:",
@@ -1051,6 +1066,9 @@
                 nfcNotConnected: "无法连接到 RFID 读卡器",
                 nfcAuthFailed: "认证失败",
                 unknownError: "未知错误",
+                pcscServiceMissing: "未找到 PC/SC 服务。请安装 NFC/智能卡驱动并启动服务。",
+                pcscNoReaders: "未检测到 RFID 读卡器。请连接读卡器或检查驱动。",
+                pcscUnknownError: "NFC/PCSC 错误。请检查驱动。",
 
                 settingsSaved: "设置已保存！",
                 tagInfoTitle: "读取的标签信息:",
@@ -1140,6 +1158,7 @@
 
         let autoReadActive = false;
         let lastAutoDataSerialized = null;
+        let lastStatusErrorKey = null;
 
         const elements = {
             manufacturerSection: document.getElementById('manufacturerSection'),
@@ -1636,6 +1655,17 @@
             return t.unknownError || 'Unknown error';
         }
 
+        function getPcscErrorKey(status) {
+            if (!status || !status.errorCode) return null;
+            switch (status.errorCode) {
+                case 'PCSC_SERVICE_NOT_RUNNING':
+                    return 'pcscServiceMissing';
+                case 'NO_READERS':
+                    return 'pcscNoReaders';
+                default:
+                    return 'pcscUnknownError';
+            }
+        }
 
         // Real connection polling (no simulation)
         async function pollConnectionStatus() {
@@ -1643,6 +1673,16 @@
                 if (window.electronAPI && window.electronAPI.getStatus) {
                     const status = await window.electronAPI.getStatus();
                     elements.connectionStatus.classList.toggle('connected', !!status.connected);
+                    const errorKey = getPcscErrorKey(status);
+                    if (status.connected) {
+                        lastStatusErrorKey = null;
+                    } else if (errorKey && errorKey !== lastStatusErrorKey) {
+                        const t = translations[currentLanguage] || translations.en;
+                        showStatus(t[errorKey] || t.unknownError, 'error');
+                        lastStatusErrorKey = errorKey;
+                    } else if (!errorKey && lastStatusErrorKey) {
+                        lastStatusErrorKey = null;
+                    }
                 } else {
                     elements.connectionStatus.classList.remove('connected');
                 }
