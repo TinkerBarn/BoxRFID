@@ -3,7 +3,7 @@
 BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used by QIDI Box, a multi color System for QIDI Plus 4 and QIDI Q2 3D printers. It lets you set material, color, and manufacturer codes (not yet supported by QIDI Box, Maybe in future), read tags, and auto‑read when a tag is detected.
 
 - Platform: Windows (Electron)
-- Version: 1.0.0
+- Version: 1.1.0
 - License: CC BY‑NC‑SA 4.0
 
 ## Features
@@ -15,6 +15,27 @@ BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used
 - Support edit / delete filaments from Filament list and Vendor list
 - Uses PC/SC (nfc-pcsc) for reader support (tested with ACR122U)
 
+## What’s new in v1.1.0
+
+Version **1.1.0** focuses on stability, startup performance, and proper internationalization.
+
+### 🚀 Improvements
+- **Much faster startup** (window opens in ~2–3 seconds instead of 20–30 seconds)
+- **Reliable window opening** – app no longer runs headless in the background
+- **Persistent settings**  
+  Selected language, manufacturer usage, and preferences are now reliably restored on next startup
+- **Improved Windows compatibility**  
+  Chromium disk cache is redirected to Electron userData to avoid permission issues on locked-down systems
+
+### 🌍 Internationalization (i18n)
+- All NFC and status messages are now **fully localized**
+- No more mixed German/English messages when another language is selected
+- Consistent behavior across all supported languages (DE, EN, FR, ES, PT, ZH)
+
+### 🧩 Technical
+- Native modules are rebuilt correctly for the bundled Electron version
+- Improved startup robustness on systems with antivirus or Controlled Folder Access
+
 ## REQUIREMENTS
 - ACR122U USB reader/writer (i.e. https://www.amazon.com/ACR122U-Contactless-Reader-Lianshi-Writer/dp/B07DK9GX1N)
 - Mifare classic 1K tags (i.e. https://www.amazon.com/BABIQT-Sticker-Classic-Self-Adhesive-Stickers/dp/B0BZRS35CT)
@@ -25,9 +46,27 @@ BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used
 > You do **not** need to compile the code yourself!  
 > Simply download the latest Windows EXE directly from the release page:
 >
-> 👉 **[BoxRFID v1.0.0 – Download Windows EXE](https://github.com/TinkerBarn/BoxRFID/releases/tag/v1.0.0)**
+> 👉 **[BoxRFID – Download latest Windows EXE](https://github.com/TinkerBarn/BoxRFID/releases/latest)**
 >
-> This allows you to get started right away, without setting up a development environment.
+> **This release is recommended for all users due to major stability and startup improvements.**
+
+### ⚠️ Note about Windows SmartScreen / Antivirus (unsigned EXE)
+
+BoxRFID binaries are currently **not code-signed**. On some Windows systems, the **first start** after downloading may take a bit longer because **SmartScreen / Defender / Antivirus** scans the file(s).
+
+If you experience a slow first start (or you only see the process in Task Manager for a while), try this:
+
+- **Prefer the portable EXE** if the installer feels slow on first run
+- **Save the file locally** (e.g. to a dedicated folder like `C:\Tools\BoxRFID`) and start it from there
+- Avoid running directly from the browser “Run/Open” prompt — download first, then launch
+- After the first successful start, subsequent starts are usually much faster
+
+### 🛠️ Troubleshooting: window does not appear immediately
+
+- Wait a moment on first run (scan may still be running in the background)
+- Try the **portable EXE** instead of the setup installer (and vice versa)
+- Ensure you extracted the app if you downloaded a ZIP (do not run from inside an archive)
+- If no NFC reader/driver is installed: the app will still open, but NFC features will show “not connected”
 
 
 ## HOW TO USE DIY RFID FILAMENT SPOOLS WITH THE QIDI BOX
@@ -161,8 +200,8 @@ npm run build-win
 
 After building, you will find the following files in the `dist\` folder:
 
-- `BoxRFID – Filament Tag Manager Setup 1.0.0.exe` (Windows installer)
-- `BoxRFID – Filament Tag Manager 1.0.0.exe` (portable, runs without installation)
+- `BoxRFID – Filament Tag Manager Setup <version>.exe` (Windows installer)
+- `BoxRFID – Filament Tag Manager <version>.exe` (portable, runs without installation)
 
 ---
 
