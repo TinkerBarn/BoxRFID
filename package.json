@@ -1,6 +1,6 @@
 {
   "name": "BoxRFID",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "BoxRFID – Filament Tag Manager",
   "main": "main.js",
   "scripts": {
