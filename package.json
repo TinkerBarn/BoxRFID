@@ -1,6 +1,6 @@
 {
   "name": "BoxRFID",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "BoxRFID – Filament Tag Manager",
   "main": "main.js",
   "scripts": {
@@ -21,7 +21,19 @@
       "output": "dist"
     },
     "files": [
-      "**/*"
+      "**/*",
+      "!dist/**",
+      "!screenshots/**",
+      "!docs/**",
+      "!tools/**",
+      "!**/.github/**",
+      "!**/.vscode/**",
+      "!**/node_modules/.cache/**",
+      "!**/*.md",
+      "!**/*.map",
+      "!builder-debug.yml",
+      "!builder-effective-config.yaml",
+      "!latest.yml"
     ],
     "asar": true,
     "win": {

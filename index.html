@@ -2036,17 +2036,25 @@
 
             // Auto-read toggle
             elements.autoReadBtn.addEventListener('click', async () => {
+                const t = translations[currentLanguage] || translations.en;
                 autoReadActive = !autoReadActive;
                 setAutoReadUi(autoReadActive);
                 try {
                     if (window.electronAPI && window.electronAPI.setAutoRead) {
-                        await window.electronAPI.setAutoRead(autoReadActive);
+                        const res = await window.electronAPI.setAutoRead(autoReadActive);
+                        // If backend rejects enabling (e.g. no NFC reader/driver), revert UI and show message
+                        if (res && typeof res.enabled === 'boolean' && res.enabled !== autoReadActive) {
+                            autoReadActive = res.enabled;
+                            setAutoReadUi(autoReadActive);
+                            if (res.messageKey === 'nfcNotConnected') {
+                                showStatus(t.nfcNotConnected, 'error');
+                            }
+                        }
                     }
                 } catch {}
                 if (!autoReadActive) elements.connectionStatus.classList.remove('connected');
             });
-
-            // Backend auto-status (optional)
+// Backend auto-status (optional)
             if (window.electronAPI && window.electronAPI.onAutoStatus) {
                 window.electronAPI.onAutoStatus(({ present, tagData, error }) => {
                     if (present && tagData) {
