@@ -9,8 +9,6 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const fsp = fs.promises;
-const NFCService = require('./nfc-service');
-
 // Workaround for some Windows setups (AV / Controlled Folder Access) that can block Chromium cache writes.
 // This reduces noisy "Unable to create cache" errors and can help avoid rare startup issues.
 app.commandLine.appendSwitch('disable-gpu-shader-disk-cache');
@@ -18,13 +16,43 @@ app.commandLine.appendSwitch('disable-gpu-shader-disk-cache');
 app.commandLine.appendSwitch('disk-cache-dir', path.join(app.getPath('userData'), 'cache'));
 
 let mainWindow;
-let nfcService = null;
 
-function getNfcService() {
-  if (!nfcService) nfcService = new NFCService();
+// NFC is expensive / can block on some Windows systems if no PC/SC service/driver is present.
+// To keep startup fast and always show the UI, we lazy-load the NFC module only when required.
+let NFCServiceCtor = null;
+let nfcService = null;
+let nfcInitFailedAt = 0;
+let nfcInitLastErr = null;
+const NFC_RETRY_AFTER_MS = 5000;
+
+function tryGetNfcService() {
   return nfcService;
 }
 
+function getNfcService(options = {}) {
+  if (nfcService) return nfcService;
+
+  const forceRetry = !!options.forceRetry;
+  const now = Date.now();
+  if (!forceRetry && nfcInitFailedAt && (now - nfcInitFailedAt) < NFC_RETRY_AFTER_MS) {
+    // Avoid repeated costly init attempts in a tight loop.
+    throw new Error('NFC_NOT_CONNECTED');
+  }
+
+  try {
+    if (!NFCServiceCtor) NFCServiceCtor = require('./nfc-service');
+    nfcService = new NFCServiceCtor();
+    nfcInitFailedAt = 0;
+    nfcInitLastErr = null;
+    return nfcService;
+  } catch (e) {
+    nfcService = null;
+    nfcInitFailedAt = now;
+    nfcInitLastErr = e;
+    console.error('NFC init failed:', e && e.message ? e.message : e);
+    throw new Error('NFC_NOT_CONNECTED');
+  }
+}
 let isBusy = false;
 
 function toMessageKey(err) {
@@ -69,7 +97,26 @@ function createMainWindow() {
   });
 
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
-  mainWindow.once('ready-to-show', () => mainWindow.show());
+const SHOW_TIMEOUT_MS = 3000;
+const showWindow = () => {
+  if (mainWindow && !mainWindow.isDestroyed() && !mainWindow.isVisible()) {
+    mainWindow.show();
+  }
+};
+
+mainWindow.once('ready-to-show', () => {
+  showWindow();
+
+  // Optional: initialize NFC after UI is visible, so the connection indicator can turn green quickly
+  // without risking a "headless" startup on systems where PC/SC init blocks.
+  setTimeout(() => {
+    try { getNfcService({ forceRetry: false }); } catch {}
+  }, 800);
+});
+
+// Fallback: if ready-to-show never fires, still show a window so users don't see only a Task Manager entry.
+setTimeout(showWindow, SHOW_TIMEOUT_MS);
+
 
   // If the renderer fails to load, the window may never become visible.
   // Log the error and show the window as a fallback so users don't end up with a "headless" process.
@@ -98,12 +145,14 @@ function startAutoLoop() {
       if (!autoEnabled) return;
       if (isBusy) return;
 
-      const uid = getNfcService().getCurrentUID();
+      const svc = tryGetNfcService();
+      if (!svc) return;
+      const uid = svc.getCurrentUID();
       if (uid && uid !== lastAutoUID) {
         // New tag appeared or changed
         isBusy = true;
         try {
-          const data = await getNfcService().readTag();
+          const data = await svc.readTag();
           lastAutoUID = uid;
           sendAutoStatus({ present: true, tagData: data, error: null });
         } catch (err) {
@@ -137,7 +186,7 @@ ipcMain.handle('rfid-write', async (_event, { materialCode, colorCode, manufactu
   if (isBusy) return { success: false, messageKey: 'busy' };
   isBusy = true;
   try {
-    await getNfcService().writeTag(
+    await getNfcService({ forceRetry: true }).writeTag(
       parseInt(materialCode, 10),
       parseInt(colorCode, 10),
       parseInt(manufacturerCode || 1, 10)
@@ -154,7 +203,7 @@ ipcMain.handle('rfid-read', async () => {
   if (isBusy) return { success: false, messageKey: 'busy' };
   isBusy = true;
   try {
-    const data = await getNfcService().readTag();
+    const data = await getNfcService({ forceRetry: true }).readTag();
     return { success: true, data };
   } catch (err) {
     return { success: false, messageKey: toMessageKey(err), details: err && err.message ? String(err.message) : String(err) };
@@ -164,34 +213,49 @@ ipcMain.handle('rfid-read', async () => {
 });
 
 ipcMain.handle('rfid-status', () => {
-  return getNfcService().getStatus();
+  // Do not initialize NFC on status polling; keep startup fast even without reader/driver.
+  const svc = tryGetNfcService();
+  if (!svc) {
+    return { connected: false, readerName: null, cardPresent: false, uid: null };
+  }
+  return svc.getStatus();
 });
-
 ipcMain.handle('rfid-auto', async (_event, { enable }) => {
   autoEnabled = !!enable;
+
   if (autoEnabled) {
-    startAutoLoop();
-    // If a tag is already present, try a first read immediately
-    const uid = getNfcService().getCurrentUID();
-    if (uid) {
-      if (!isBusy) {
+    // Auto-read should never block the UI: try to init NFC, otherwise fail fast.
+    try {
+      const svc = getNfcService({ forceRetry: true });
+      startAutoLoop();
+
+      // If a tag is already present, try a first read immediately
+      const uid = svc.getCurrentUID();
+      if (uid && !isBusy) {
         isBusy = true;
         try {
-          const data = await getNfcService().readTag();
+          const data = await svc.readTag();
           lastAutoUID = uid;
           sendAutoStatus({ present: true, tagData: data, error: null });
         } catch (err) {
-          sendAutoStatus({ present: true, tagData: null, error: err.message || String(err) });
+          sendAutoStatus({ present: true, tagData: null, error: err && err.message ? String(err.message) : String(err) });
         } finally {
           isBusy = false;
         }
       }
+
+      return { enabled: true };
+    } catch (err) {
+      autoEnabled = false;
+      stopAutoLoop();
+      sendAutoStatus({ present: false, tagData: null, error: 'NFC_NOT_CONNECTED' });
+      return { enabled: false, messageKey: 'nfcNotConnected' };
     }
   } else {
     stopAutoLoop();
     sendAutoStatus({ present: false, tagData: null, error: null });
+    return { enabled: false };
   }
-  return { enabled: autoEnabled };
 });
 
 // IPC handlers: File dialog and file system access for official cfg

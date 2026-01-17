@@ -1,19 +1,32 @@
 # BoxRFID – Filament Tag Manager
 
-BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used by QIDI Box, a multi color System for QIDI Plus 4 and QIDI Q2 3D printers. It lets you set material, color, and manufacturer codes (not yet supported by QIDI Box, Maybe in future), read tags, and auto‑read when a tag is detected.
+BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used by QIDI Box, a multi color System for QIDI Plus 4 and QIDI Q2 3D printers. It lets you set material, color, and manufacturer codes (not yet supported by QIDI Box, maybe in future), read tags, and auto-read when a tag is detected.
 
 - Platform: Windows (Electron)
-- Version: 1.1.0
-- License: CC BY‑NC‑SA 4.0
+- Version: 1.2.0
+- License: CC BY-NC-SA 4.0
 
 ## Features
 - Write filament data (material, color, manufacturer) to compatible tags
 - Read and display tag data
-- Auto‑read mode when a tag is presented; clears when removed
+- Auto-read mode when a tag is presented; clears when removed
 - Multi language support (DE, EN, FR, ES, PT, ZH)
 - Support Import of "officiall_filas_list.cfg" - optional
 - Support edit / delete filaments from Filament list and Vendor list
 - Uses PC/SC (nfc-pcsc) for reader support (tested with ACR122U)
+
+## What’s new in v1.2.0
+
+Version **1.2.0** focuses on **even faster startup** and **robust behavior when no NFC reader/driver is present**.
+
+### 🚀 Improvements
+- **Zero-block startup**: the main window shows quickly even if **no NFC reader is connected** or **no driver** is installed
+- **Lazy NFC initialization**: the NFC/PCSC layer is only loaded when needed (read/write/auto-read), so startup no longer depends on PC/SC
+- **Auto-read enable fails fast** (and shows a localized message) when no reader/driver is available
+- **Connection indicator still works**: NFC init is triggered *after* the UI is visible, so the dot can turn green without risking a headless launch
+
+### 🧩 Packaging
+- Reduced packaged app size by excluding dev-only files from the build output (README, screenshots, etc.)
 
 ## What’s new in v1.1.0
 
@@ -46,10 +59,27 @@ Version **1.1.0** focuses on stability, startup performance, and proper internat
 > You do **not** need to compile the code yourself!  
 > Simply download the latest Windows EXE directly from the release page:
 >
-> 👉 **[BoxRFID v1.1.0 – Download Windows EXE](https://github.com/TinkerBarn/BoxRFID/releases/tag/v1.1.0)**
+> 👉 **[BoxRFID – Download latest Windows EXE](https://github.com/TinkerBarn/BoxRFID/releases/latest)**
 >
 > **This release is recommended for all users due to major stability and startup improvements.**
 
+### ⚠️ Note about Windows SmartScreen / Antivirus (unsigned EXE)
+
+BoxRFID binaries are currently **not code-signed**. On some Windows systems, the **first start** after downloading may take a bit longer because **SmartScreen / Defender / Antivirus** scans the file(s).
+
+If you experience a slow first start (or you only see the process in Task Manager for a while), try this:
+
+- **Prefer the portable EXE** if the installer feels slow on first run
+- **Save the file locally** (e.g. to a dedicated folder like `C:\Tools\BoxRFID`) and start it from there
+- Avoid running directly from the browser “Run/Open” prompt — download first, then launch
+- After the first successful start, subsequent starts are usually much faster
+
+### 🛠️ Troubleshooting: window does not appear immediately
+
+- Wait a moment on first run (scan may still be running in the background)
+- Try the **portable EXE** instead of the setup installer (and vice versa)
+- Ensure you extracted the app if you downloaded a ZIP (do not run from inside an archive)
+- If no NFC reader/driver is installed: the app will still open, but NFC features will show “not connected”
 
 ## HOW TO USE DIY RFID FILAMENT SPOOLS WITH THE QIDI BOX
 
@@ -58,43 +88,37 @@ Version **1.1.0** focuses on stability, startup performance, and proper internat
 
 [![Watch the video](https://img.youtube.com/vi/LO6eAkdcSCA/hqdefault.jpg)](https://youtu.be/LO6eAkdcSCA)
 
-
 ## SCREENSHOTS
+
+> Note: Screenshots may differ slightly from v1.2.0 depending on when they were taken.
+
 - Main Menu
 
 ![Main Menu](screenshots/Main%20Menu%20v1.0.0.png)
-
 
 - Read tag Information and Show result
 
 ![Read Tag Information](screenshots/Read%20Tag%20Information%20v1.0.0.png)
 
-
 - Write tag Information - ABS and Dark Blue selected - Write successfully
 
 ![Write Tag Information](screenshots/Write%20Tag%20Information%20v1.0.0.png)
-
 
 - Setup Language
 
 ![Setup - Language](screenshots/Setup%20-%20Language%20v1.0.0.png)
 
-
 - Setup Materials
 
 ![Setup - Materials](screenshots/Setup%20-%20Materials%20v1.0.0.png)
-
 
 - Setup Manufacturers - only available if in Setup - General activated
 
 ![Setup - Manufacturers](screenshots/Setup%20-%20Manufacturers%20v1.0.0.png)
 
-
 - Setup General
 
 ![Setup - General](screenshots/Setup%20-%20General%20v1.0.0.png)
-
-
 
 ## Windows Development Setup (PowerShell)
 
@@ -204,8 +228,6 @@ After building, you will find the following files in the `dist\` folder:
 
 ---
 
-
-
 ## Notes
 - EXE/installer icon comes from electron-builder `build.win.icon` → `assets/icon.ico`
 - Window/taskbar icon set in `main.js`:
@@ -231,5 +253,5 @@ package.json
 ```
 
 ## License
-Creative Commons Attribution‑NonCommercial‑ShareAlike 4.0 International (CC BY‑NC‑SA 4.0).
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).
 For commercial licensing, contact: boxrfid@tinkerbarn.de.

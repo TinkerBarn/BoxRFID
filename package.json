@@ -21,7 +21,19 @@
       "output": "dist"
     },
     "files": [
-      "**/*"
+      "**/*",
+      "!dist/**",
+      "!screenshots/**",
+      "!docs/**",
+      "!tools/**",
+      "!**/.github/**",
+      "!**/.vscode/**",
+      "!**/node_modules/.cache/**",
+      "!**/*.md",
+      "!**/*.map",
+      "!builder-debug.yml",
+      "!builder-effective-config.yaml",
+      "!latest.yml"
     ],
     "asar": true,
     "win": {
