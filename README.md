@@ -28,6 +28,9 @@ Version **1.2.0** focuses on **even faster startup** and **robust behavior when 
 ### 🧩 Packaging
 - Reduced packaged app size by excluding dev-only files from the build output (README, screenshots, etc.)
 
+## See also my new project for a standalone BoxRFID-Touch version
+https://github.com/TinkerBarn/BoxRFID-Touch
+
 ## What’s new in v1.1.0
 
 Version **1.1.0** focuses on stability, startup performance, and proper internationalization.
