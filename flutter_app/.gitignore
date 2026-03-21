@@ -1,0 +1,32 @@
+# Flutter / Dart build artifacts
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+*.iml
+*.class
+
+# Android
+android/.gradle/
+android/local.properties
+android/key.properties
+android/app/google-services.json
+android/.idea/
+
+# iOS
+ios/Flutter/Flutter.podspec
+ios/Flutter/flutter_export_environment.sh
+ios/*.xcworkspace/xcshareddata/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/

@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- The INTERNET permission is required in profile mode only.
+         It allows Flutter's Dart VM service (performance profiling) to bind
+         its HTTP server socket.  This permission is NOT merged into release
+         builds. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+</manifest>

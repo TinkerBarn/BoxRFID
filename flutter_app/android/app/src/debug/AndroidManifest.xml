@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- The INTERNET permission is required in debug mode only.
+         It allows Flutter's Dart VM service (hot reload / DevTools) to bind
+         its HTTP server socket.  This permission is NOT merged into release
+         builds (which use the main AndroidManifest.xml alone). -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+</manifest>
