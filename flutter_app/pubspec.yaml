@@ -1,0 +1,25 @@
+name: box_rfid
+description: BoxRFID – Filament Tag Manager for Android. Write custom RFID tags for the QIDI Box using your device's built-in NFC reader.
+version: 1.0.0+1
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.22.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  nfc_manager: ^3.3.0
+  shared_preferences: ^2.3.1
+  provider: ^6.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icon.png
