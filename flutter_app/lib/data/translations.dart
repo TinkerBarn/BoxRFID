@@ -35,7 +35,7 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'manufacturerFormTitle': 'Hersteller hinzufügen/bearbeiten',
     'manufacturerUseLabel': 'Hersteller verwenden',
     'manufacturerInfoText':
-        'Diese Funktion findet derzeit keine Verwendung, da als Standard immer QIDI verwendet wird. Es ist möglich, dass diese Funktion zukünftig von QIDI unterstützt wird.',
+        'Wenn aktiviert, wird der ausgewählte Herstellercode zusammen mit Material- und Farbdaten auf den NFC-Tag geschrieben.',
     'saveSettingsBtn': 'Einstellungen speichern',
     'saveMaterialBtn': 'Speichern',
     'saveManufacturerBtn': 'Speichern',
@@ -91,6 +91,10 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'clearPrefsMessage':
         'Möchten Sie wirklich die App-Einstellungen zurücksetzen? Sprache, Auto-Erkennung und Hersteller-Verwendung werden auf Standard zurückgesetzt. Benutzerdefinierte Materialien/Hersteller bleiben erhalten.',
     'clearPrefsSuccess': 'App-Einstellungen zurückgesetzt.',
+    'resetListsBtn': 'Auf Standard zurücksetzen',
+    'resetListsMessage':
+        'Materialien und Hersteller auf Standardwerte zurücksetzen? Alle benutzerdefinierten Einträge gehen verloren.',
+    'resetListsSuccess': 'Listen auf Standard zurückgesetzt.',
     'scanTagPrompt': 'Halten Sie ein NFC-Tag ans Gerät…',
     'nfcSessionCancelled': 'NFC-Sitzung abgebrochen.',
     'colors': {
@@ -149,7 +153,7 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'manufacturerFormTitle': 'Add/Edit Manufacturer',
     'manufacturerUseLabel': 'Use Manufacturer',
     'manufacturerInfoText':
-        'This function is currently not in use, as QIDI is always used as default. It is possible that this function will be supported by QIDI in the future.',
+        'When enabled, the selected manufacturer code will be written to the NFC tag along with material and color data.',
     'saveSettingsBtn': 'Save Settings',
     'saveMaterialBtn': 'Save',
     'saveManufacturerBtn': 'Save',
@@ -205,6 +209,10 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'clearPrefsMessage':
         'Do you really want to reset the app preferences? Language, Auto Detection and Manufacturer usage will be reset to defaults. Custom materials/manufacturers will be kept.',
     'clearPrefsSuccess': 'App preferences reset.',
+    'resetListsBtn': 'Reset to Defaults',
+    'resetListsMessage':
+        'Reset materials and manufacturers to defaults? All custom entries will be lost.',
+    'resetListsSuccess': 'Lists reset to defaults.',
     'scanTagPrompt': 'Hold an NFC tag to the device…',
     'nfcSessionCancelled': 'NFC session cancelled.',
     'colors': {
@@ -263,7 +271,7 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'manufacturerFormTitle': 'Añadir/Editar Fabricante',
     'manufacturerUseLabel': 'Usar Fabricante',
     'manufacturerInfoText':
-        'Esta función no está en uso actualmente, ya que siempre se usa QIDI como predeterminado. Es posible que esta función sea compatible con QIDI en el futuro.',
+        'Cuando está activado, el código de fabricante seleccionado se escribirá en la etiqueta NFC junto con los datos de material y color.',
     'saveSettingsBtn': 'Guardar Configuración',
     'saveMaterialBtn': 'Guardar',
     'saveManufacturerBtn': 'Guardar',
@@ -319,6 +327,10 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'clearPrefsMessage':
         '¿Desea realmente restablecer las preferencias de la aplicación? El idioma, la detección automática y el uso de fabricante se restablecerán a los valores predeterminados. Se conservarán los materiales/fabricantes personalizados.',
     'clearPrefsSuccess': 'Preferencias de la app restablecidas.',
+    'resetListsBtn': 'Restablecer a los Valores Predeterminados',
+    'resetListsMessage':
+        '¿Restablecer materiales y fabricantes a los valores predeterminados? Todas las entradas personalizadas se perderán.',
+    'resetListsSuccess': 'Listas restablecidas a los valores predeterminados.',
     'scanTagPrompt': 'Acerque una etiqueta NFC al dispositivo…',
     'nfcSessionCancelled': 'Sesión NFC cancelada.',
     'colors': {
@@ -377,7 +389,7 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'manufacturerFormTitle': 'Adicionar/Editar Fabricante',
     'manufacturerUseLabel': 'Usar Fabricante',
     'manufacturerInfoText':
-        'Esta função não está em uso atualmente, pois o QIDI é sempre usado como padrão. É possível que esta função seja suportada pelo QIDI no futuro.',
+        'Quando ativado, o código do fabricante selecionado será gravado na etiqueta NFC junto com os dados de material e cor.',
     'saveSettingsBtn': 'Salvar Configurações',
     'saveMaterialBtn': 'Salvar',
     'saveManufacturerBtn': 'Salvar',
@@ -434,6 +446,10 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'clearPrefsMessage':
         'Deseja realmente redefinir as preferências do aplicativo? Idioma, Detecção Automática e uso do Fabricante serão redefinidos para os padrões. Materiais/fabricantes personalizados serão mantidos.',
     'clearPrefsSuccess': 'Preferências do app redefinidas.',
+    'resetListsBtn': 'Restaurar Padrões',
+    'resetListsMessage':
+        'Restaurar materiais e fabricantes para os padrões? Todas as entradas personalizadas serão perdidas.',
+    'resetListsSuccess': 'Listas restauradas para os padrões.',
     'scanTagPrompt': 'Aproxime uma etiqueta NFC do dispositivo…',
     'nfcSessionCancelled': 'Sessão NFC cancelada.',
     'colors': {
@@ -492,7 +508,7 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'manufacturerFormTitle': 'Ajouter/Modifier Fabricant',
     'manufacturerUseLabel': 'Utiliser Fabricant',
     'manufacturerInfoText':
-        "Cette fonction n'est actuellement pas utilisée, car QIDI est toujours utilisé par défaut. Il est possible que cette fonction soit prise en charge par QIDI à l'avenir.",
+        "Lorsqu'il est activé, le code fabricant sélectionné sera écrit sur le tag NFC avec les données de matériau et de couleur.",
     'saveSettingsBtn': 'Enregistrer Paramètres',
     'saveMaterialBtn': 'Enregistrer',
     'saveManufacturerBtn': 'Enregistrer',
@@ -549,6 +565,10 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'clearPrefsMessage':
         "Voulez-vous vraiment réinitialiser les préférences de l'application ? La langue, la détection automatique et l'utilisation du fabricant seront rétablies par défaut. Les matériaux/fabricants personnalisés seront conservés.",
     'clearPrefsSuccess': "Préférences de l'appli réinitialisées.",
+    'resetListsBtn': 'Rétablir les Valeurs par Défaut',
+    'resetListsMessage':
+        'Rétablir les matériaux et fabricants aux valeurs par défaut ? Toutes les entrées personnalisées seront perdues.',
+    'resetListsSuccess': 'Listes réinitialisées aux valeurs par défaut.',
     'scanTagPrompt': 'Approchez un tag NFC de l\'appareil…',
     'nfcSessionCancelled': 'Session NFC annulée.',
     'colors': {
@@ -606,7 +626,7 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'materialFormTitle': '添加/编辑材料',
     'manufacturerFormTitle': '添加/编辑制造商',
     'manufacturerUseLabel': '使用制造商',
-    'manufacturerInfoText': '此功能目前不使用，因为默认总是使用QIDI。未来可能QIDI会支持此功能。',
+    'manufacturerInfoText': '启用后，所选制造商代码将与材料和颜色数据一起写入NFC标签。',
     'saveSettingsBtn': '保存设置',
     'saveMaterialBtn': '保存',
     'saveManufacturerBtn': '保存',
@@ -656,6 +676,9 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'clearPrefsMessage':
         '是否确定要重置应用首选项？语言、自动检测和制造商使用将恢复为默认。自定义的材料/制造商将保留。',
     'clearPrefsSuccess': '首选项已重置。',
+    'resetListsBtn': '重置为默认值',
+    'resetListsMessage': '将材料和制造商重置为默认值？所有自定义条目将丢失。',
+    'resetListsSuccess': '列表已重置为默认值。',
     'scanTagPrompt': '将NFC标签靠近设备…',
     'nfcSessionCancelled': 'NFC会话已取消。',
     'colors': {

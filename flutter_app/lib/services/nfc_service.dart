@@ -47,8 +47,11 @@ class NfcService {
   Future<TagData> readTag() async {
     final completer = _TagCompleter<TagData>();
     _activeCompleter = completer;
+    bool tagHandled = false;
 
     await NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
+      if (tagHandled) return;
+      tagHandled = true;
       try {
         final mifareClassic = MifareClassic.from(tag);
         if (mifareClassic == null) {
@@ -119,8 +122,11 @@ class NfcService {
   }) async {
     final completer = _TagCompleter<void>();
     _activeCompleter = completer;
+    bool tagHandled = false;
 
     await NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
+      if (tagHandled) return;
+      tagHandled = true;
       try {
         final mifareClassic = MifareClassic.from(tag);
         if (mifareClassic == null) {
