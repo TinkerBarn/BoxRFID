@@ -64,15 +64,31 @@ class AppSettings {
       return {};
     }
 
+    /// Merge saved entries with the current defaults so that:
+    ///   - All default codes always reflect the latest spec names.
+    ///   - User-added codes (not in [defaults]) are preserved on top.
+    Map<int, String> mergeWithDefaults(
+        Map<int, String> saved, Map<int, String> defaults) {
+      return {
+        ...defaults,
+        for (final e in saved.entries)
+          if (!defaults.containsKey(e.key)) e.key: e.value,
+      };
+    }
+
+    final savedMaterials = json.containsKey('materials')
+        ? parseMaterialsMap(json['materials'])
+        : <int, String>{};
+    final savedManufacturers = json.containsKey('manufacturers')
+        ? parseMaterialsMap(json['manufacturers'])
+        : <int, String>{};
+
     return AppSettings(
       language: (json['language'] as String?) ?? 'en',
       useManufacturer: (json['useManufacturer'] as bool?) ?? false,
-      materials: json.containsKey('materials')
-          ? parseMaterialsMap(json['materials'])
-          : Map<int, String>.from(kDefaultMaterials),
-      manufacturers: json.containsKey('manufacturers')
-          ? parseMaterialsMap(json['manufacturers'])
-          : Map<int, String>.from(kDefaultManufacturers),
+      materials: mergeWithDefaults(savedMaterials, kDefaultMaterials),
+      manufacturers:
+          mergeWithDefaults(savedManufacturers, kDefaultManufacturers),
     );
   }
 }

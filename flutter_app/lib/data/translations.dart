@@ -35,7 +35,7 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'manufacturerFormTitle': 'Hersteller hinzufügen/bearbeiten',
     'manufacturerUseLabel': 'Hersteller verwenden',
     'manufacturerInfoText':
-        'Wenn aktiviert, wird der ausgewählte Herstellercode zusammen mit Material- und Farbdaten auf den NFC-Tag geschrieben.',
+        'Diese Funktion findet derzeit keine Verwendung, da als Standard immer QIDI verwendet wird. Es ist möglich, dass diese Funktion zukünftig von QIDI unterstützt wird.',
     'saveSettingsBtn': 'Einstellungen speichern',
     'saveMaterialBtn': 'Speichern',
     'saveManufacturerBtn': 'Speichern',
@@ -153,7 +153,7 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'manufacturerFormTitle': 'Add/Edit Manufacturer',
     'manufacturerUseLabel': 'Use Manufacturer',
     'manufacturerInfoText':
-        'When enabled, the selected manufacturer code will be written to the NFC tag along with material and color data.',
+        'This function is currently not in use, as QIDI is always used as default. It is possible that this function will be supported by QIDI in the future.',
     'saveSettingsBtn': 'Save Settings',
     'saveMaterialBtn': 'Save',
     'saveManufacturerBtn': 'Save',
@@ -271,7 +271,7 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'manufacturerFormTitle': 'Añadir/Editar Fabricante',
     'manufacturerUseLabel': 'Usar Fabricante',
     'manufacturerInfoText':
-        'Cuando está activado, el código de fabricante seleccionado se escribirá en la etiqueta NFC junto con los datos de material y color.',
+        'Esta función no está en uso actualmente, ya que siempre se usa QIDI como predeterminado. Es posible que esta función sea compatible con QIDI en el futuro.',
     'saveSettingsBtn': 'Guardar Configuración',
     'saveMaterialBtn': 'Guardar',
     'saveManufacturerBtn': 'Guardar',
@@ -389,7 +389,7 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'manufacturerFormTitle': 'Adicionar/Editar Fabricante',
     'manufacturerUseLabel': 'Usar Fabricante',
     'manufacturerInfoText':
-        'Quando ativado, o código do fabricante selecionado será gravado na etiqueta NFC junto com os dados de material e cor.',
+        'Esta função não está em uso atualmente, pois o QIDI é sempre usado como padrão. É possível que esta função seja suportada pelo QIDI no futuro.',
     'saveSettingsBtn': 'Salvar Configurações',
     'saveMaterialBtn': 'Salvar',
     'saveManufacturerBtn': 'Salvar',
@@ -508,7 +508,7 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'manufacturerFormTitle': 'Ajouter/Modifier Fabricant',
     'manufacturerUseLabel': 'Utiliser Fabricant',
     'manufacturerInfoText':
-        "Lorsqu'il est activé, le code fabricant sélectionné sera écrit sur le tag NFC avec les données de matériau et de couleur.",
+        "Cette fonction n'est actuellement pas utilisée, car QIDI est toujours utilisé par défaut. Il est possible que cette fonction soit prise en charge par QIDI à l'avenir.",
     'saveSettingsBtn': 'Enregistrer Paramètres',
     'saveMaterialBtn': 'Enregistrer',
     'saveManufacturerBtn': 'Enregistrer',
@@ -626,7 +626,7 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'materialFormTitle': '添加/编辑材料',
     'manufacturerFormTitle': '添加/编辑制造商',
     'manufacturerUseLabel': '使用制造商',
-    'manufacturerInfoText': '启用后，所选制造商代码将与材料和颜色数据一起写入NFC标签。',
+    'manufacturerInfoText': '此功能目前不使用，因为默认总是使用QIDI。未来可能QIDI会支持此功能。',
     'saveSettingsBtn': '保存设置',
     'saveMaterialBtn': '保存',
     'saveManufacturerBtn': '保存',
