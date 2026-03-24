@@ -40,13 +40,20 @@ class _SettingsScreenState extends State<SettingsScreen>
   }
 
   void _rebuildTabs(bool showMfg) {
+    final oldController = _tabController;
+    final newLength = showMfg ? 4 : 3;
     setState(() {
       _showManufacturersTab = showMfg;
-      _tabController.dispose();
       _tabController = TabController(
-        length: showMfg ? 4 : 3,
+        length: newLength,
+        initialIndex: newLength - 1, // stay on General (always last tab)
         vsync: this,
       );
+    });
+    // Dispose the old controller after the frame has rebuilt so no widget
+    // still holds a reference to it (prevents the dependants.isEmpty error).
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      oldController.dispose();
     });
   }
 
@@ -70,6 +77,7 @@ class _SettingsScreenState extends State<SettingsScreen>
             bottom: TabBar(
               controller: _tabController,
               isScrollable: true,
+              tabAlignment: TabAlignment.start,
               labelColor: const Color(0xFF667eea),
               unselectedLabelColor: Colors.grey[600],
               indicatorColor: const Color(0xFF667eea),
@@ -664,6 +672,18 @@ class _GeneralTab extends StatelessWidget {
               ),
             ),
             const Divider(height: 24),
+            // Reset lists to defaults
+            ElevatedButton(
+              onPressed: () => _resetDefaults(context, provider),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF667eea),
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
+              ),
+              child: Text(tr(lang, 'resetListsBtn')),
+            ),
+            const SizedBox(height: 8),
             // Clear preferences
             ElevatedButton(
               onPressed: () => _clearPrefs(context, provider),
@@ -679,6 +699,23 @@ class _GeneralTab extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> _resetDefaults(BuildContext context, AppProvider provider) async {
+    final confirmed = await _showConfirmDialog(
+      context,
+      title: tr(lang, 'resetListsBtn'),
+      message: tr(lang, 'resetListsMessage'),
+      confirmLabel: tr(lang, 'confirmWarningBtn'),
+      cancelLabel: tr(lang, 'cancelWarningBtn'),
+    );
+    if (confirmed != true) return;
+    await provider.resetToDefaults();
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(tr(lang, 'resetListsSuccess'))),
+      );
+    }
   }
 
   Future<void> _clearPrefs(BuildContext context, AppProvider provider) async {

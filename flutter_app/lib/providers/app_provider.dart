@@ -80,6 +80,17 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Resets both materials and manufacturers lists to their defaults.
+  /// Preferences (language, auto-read, manufacturer toggle) are preserved.
+  Future<void> resetToDefaults() async {
+    _settings = _settings.copyWith(
+      materials: Map<int, String>.from(kDefaultMaterials),
+      manufacturers: Map<int, String>.from(kDefaultManufacturers),
+    );
+    await SettingsService.instance.save(_settings);
+    notifyListeners();
+  }
+
   // --- Selection setters ---
 
   void selectMaterial(int? code) {

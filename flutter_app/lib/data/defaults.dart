@@ -4,8 +4,10 @@
 // License: CC BY-NC-SA 4.0 (SPDX-License-Identifier: CC-BY-NC-SA-4.0)
 
 /// Default materials map: code -> name
+/// Based on the official QIDI Q2 filament list (official_filas_list.cfg).
+/// Source: QIDI Box RFID assets bundled with the printer firmware.
 const Map<int, String> kDefaultMaterials = {
-  1: 'PLA',
+  1: 'PLA Rapido',
   2: 'PLA Matte',
   3: 'PLA Metal',
   4: 'PLA Silk',
@@ -13,36 +15,50 @@ const Map<int, String> kDefaultMaterials = {
   6: 'PLA-Wood',
   7: 'PLA Basic',
   8: 'PLA Matte Basic',
-  11: 'ABS',
+  10: 'Support For PLA',
+  11: 'ABS Rapido',
   12: 'ABS-GF',
   13: 'ABS-Metal',
   14: 'ABS-Odorless',
   18: 'ASA',
-  19: 'ASA-AERO',
+  19: 'ASA-Aero',
+  20: 'ASA-CF',
+  23: 'PC',
   24: 'UltraPA',
-  25: 'PA12-CF',
+  25: 'PA-CF',
   26: 'UltraPA-CF25',
+  27: 'PA12-CF',
   30: 'PAHT-CF',
   31: 'PAHT-GF',
   32: 'Support For PAHT',
   33: 'Support For PET/PA',
   34: 'PC/ABS-FR',
+  35: 'TPEE',
+  36: 'PEBA',
   37: 'PET-CF',
   38: 'PET-GF',
   39: 'PETG Basic',
-  40: 'PETG-Though',
-  41: 'PETG',
+  40: 'PETG-Tough',
+  41: 'PETG Rapido',
+  42: 'PETG-CF',
+  43: 'PETG-GF',
   44: 'PPS-CF',
   45: 'PETG Translucent',
+  46: 'PPS-GF',
   47: 'PVA',
-  49: 'TPU-AERO',
-  50: 'TPU',
+  48: 'TPU-AERO 64D',
+  49: 'TPU-Aero',
+  50: 'TPU 95A-HF',
 };
 
 /// Default manufacturers map: code -> name
 const Map<int, String> kDefaultManufacturers = {
   0: 'Generic',
   1: 'QIDI',
+  2: 'Overture',
+  3: 'Sunlu',
+  4: 'Flashforge',
+  5: 'Ziro',
 };
 
 /// Default colors map: hex -> code

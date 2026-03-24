@@ -91,6 +91,10 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'clearPrefsMessage':
         'Möchten Sie wirklich die App-Einstellungen zurücksetzen? Sprache, Auto-Erkennung und Hersteller-Verwendung werden auf Standard zurückgesetzt. Benutzerdefinierte Materialien/Hersteller bleiben erhalten.',
     'clearPrefsSuccess': 'App-Einstellungen zurückgesetzt.',
+    'resetListsBtn': 'Auf Standard zurücksetzen',
+    'resetListsMessage':
+        'Materialien und Hersteller auf Standardwerte zurücksetzen? Alle benutzerdefinierten Einträge gehen verloren.',
+    'resetListsSuccess': 'Listen auf Standard zurückgesetzt.',
     'scanTagPrompt': 'Halten Sie ein NFC-Tag ans Gerät…',
     'nfcSessionCancelled': 'NFC-Sitzung abgebrochen.',
     'colors': {
@@ -205,6 +209,10 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'clearPrefsMessage':
         'Do you really want to reset the app preferences? Language, Auto Detection and Manufacturer usage will be reset to defaults. Custom materials/manufacturers will be kept.',
     'clearPrefsSuccess': 'App preferences reset.',
+    'resetListsBtn': 'Reset to Defaults',
+    'resetListsMessage':
+        'Reset materials and manufacturers to defaults? All custom entries will be lost.',
+    'resetListsSuccess': 'Lists reset to defaults.',
     'scanTagPrompt': 'Hold an NFC tag to the device…',
     'nfcSessionCancelled': 'NFC session cancelled.',
     'colors': {
@@ -319,6 +327,10 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'clearPrefsMessage':
         '¿Desea realmente restablecer las preferencias de la aplicación? El idioma, la detección automática y el uso de fabricante se restablecerán a los valores predeterminados. Se conservarán los materiales/fabricantes personalizados.',
     'clearPrefsSuccess': 'Preferencias de la app restablecidas.',
+    'resetListsBtn': 'Restablecer a los Valores Predeterminados',
+    'resetListsMessage':
+        '¿Restablecer materiales y fabricantes a los valores predeterminados? Todas las entradas personalizadas se perderán.',
+    'resetListsSuccess': 'Listas restablecidas a los valores predeterminados.',
     'scanTagPrompt': 'Acerque una etiqueta NFC al dispositivo…',
     'nfcSessionCancelled': 'Sesión NFC cancelada.',
     'colors': {
@@ -434,6 +446,10 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'clearPrefsMessage':
         'Deseja realmente redefinir as preferências do aplicativo? Idioma, Detecção Automática e uso do Fabricante serão redefinidos para os padrões. Materiais/fabricantes personalizados serão mantidos.',
     'clearPrefsSuccess': 'Preferências do app redefinidas.',
+    'resetListsBtn': 'Restaurar Padrões',
+    'resetListsMessage':
+        'Restaurar materiais e fabricantes para os padrões? Todas as entradas personalizadas serão perdidas.',
+    'resetListsSuccess': 'Listas restauradas para os padrões.',
     'scanTagPrompt': 'Aproxime uma etiqueta NFC do dispositivo…',
     'nfcSessionCancelled': 'Sessão NFC cancelada.',
     'colors': {
@@ -549,6 +565,10 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'clearPrefsMessage':
         "Voulez-vous vraiment réinitialiser les préférences de l'application ? La langue, la détection automatique et l'utilisation du fabricant seront rétablies par défaut. Les matériaux/fabricants personnalisés seront conservés.",
     'clearPrefsSuccess': "Préférences de l'appli réinitialisées.",
+    'resetListsBtn': 'Rétablir les Valeurs par Défaut',
+    'resetListsMessage':
+        'Rétablir les matériaux et fabricants aux valeurs par défaut ? Toutes les entrées personnalisées seront perdues.',
+    'resetListsSuccess': 'Listes réinitialisées aux valeurs par défaut.',
     'scanTagPrompt': 'Approchez un tag NFC de l\'appareil…',
     'nfcSessionCancelled': 'Session NFC annulée.',
     'colors': {
@@ -656,6 +676,9 @@ const Map<String, Map<String, dynamic>> kTranslations = {
     'clearPrefsMessage':
         '是否确定要重置应用首选项？语言、自动检测和制造商使用将恢复为默认。自定义的材料/制造商将保留。',
     'clearPrefsSuccess': '首选项已重置。',
+    'resetListsBtn': '重置为默认值',
+    'resetListsMessage': '将材料和制造商重置为默认值？所有自定义条目将丢失。',
+    'resetListsSuccess': '列表已重置为默认值。',
     'scanTagPrompt': '将NFC标签靠近设备…',
     'nfcSessionCancelled': 'NFC会话已取消。',
     'colors': {
