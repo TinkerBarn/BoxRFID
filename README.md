@@ -1,10 +1,37 @@
-# BoxRFID – Filament Tag Manager
-
-BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used by QIDI Box, a multi color System for QIDI Plus 4 and QIDI Q2 3D printers. It lets you set material, color, and manufacturer codes (not yet supported by QIDI Box, maybe in future), read tags, and auto-read when a tag is detected.
+BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used by QIDI Box, a multi color system for QIDI Plus 4 and QIDI Q2 3D printers. It lets you set material, color, and manufacturer codes (not yet supported by QIDI Box, maybe in future), read tags, and auto-read when a tag is detected.
 
 - Platform: Windows (Electron)
 - Version: 1.2.0
 - License: CC BY-NC-SA 4.0
+
+## Alternative: Simple Python version for ACR122U
+
+If the Electron version does not start properly on your Windows system, there is also a very simple alternative Python-based version available.
+
+This alternative was created for users who have problems starting the Electron application.  
+It is intentionally limited and will not replace the full BoxRFID Manager.
+
+### Limitations of the Python version
+- Only **German** and **English** are supported
+- Only the **standard material list** based on **QIDI Plus 4 firmware V1.7.0** is supported
+- Only the **colors available in firmware V1.7.0** can be selected
+- The **material list cannot be edited or extended**
+- The **manufacturer list cannot be edited or extended**
+- Designed for the **ACR122U USB NFC writer/reader**
+
+### Included files
+- Source code: `BoxRFID/Phyton/source/box-rfid-V1.0.py`
+- Windows EXE: `BoxRFID/Phyton/BoxRFID Manager.exe`
+
+### Important notes
+- I do **not provide support** for this Python version
+- I do **not plan to extend or maintain** it further
+- If someone wants to improve or expand it, please use the included source code and adapt it as needed
+
+### Python version documentation
+For details, usage notes, and limitations, see:
+
+👉 **[README for the Python version](BoxRFID/Phyton/README.md)**
 
 ## Features
 - Write filament data (material, color, manufacturer) to compatible tags
