@@ -6,14 +6,14 @@ BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used
 - Version: 1.2.0
 - License: CC BY-NC-SA 4.0
 
-    _## Alternative: Simple Python version for ACR122U
+    * ## Alternative: Simple Python version for ACR122U
     
     If the Electron version does not start properly on your Windows system, there is also a very simple alternative Python-based version available.
     
     This alternative was created for users who have problems starting the Electron application.  
     It is intentionally limited and will not replace the full BoxRFID Manager.
     
-    👉 **[README for the Python version](https://github.com/TinkerBarn/BoxRFID/tree/main/Phyton)**_
+    👉 **[README for the Python version](https://github.com/TinkerBarn/BoxRFID/tree/main/Phyton)** *
 
 ## Features
 - Write filament data (material, color, manufacturer) to compatible tags
