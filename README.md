@@ -1,3 +1,5 @@
+# BoxRFID – Filament Tag Manager
+
 BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used by QIDI Box, a multi color system for QIDI Plus 4 and QIDI Q2 3D printers. It lets you set material, color, and manufacturer codes (not yet supported by QIDI Box, maybe in future), read tags, and auto-read when a tag is detected.
 
 - Platform: Windows (Electron)
