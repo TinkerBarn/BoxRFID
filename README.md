@@ -14,7 +14,9 @@ BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used
     It is intentionally limited and will not replace the full BoxRFID Manager.*
     
     👉 ***[README for the Python version](https://github.com/TinkerBarn/BoxRFID/tree/main/Phyton)***
-
+---
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H41XBKJ6)
+---
 ## Features
 - Write filament data (material, color, manufacturer) to compatible tags
 - Read and display tag data
