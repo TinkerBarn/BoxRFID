@@ -17,6 +17,7 @@ BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used
 
 ---
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H41XBKJ6)
+
 ---
 
 ## Features
