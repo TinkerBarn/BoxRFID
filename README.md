@@ -6,6 +6,12 @@ BoxRFID is a Windows desktop app (Electron) to read and write NFC/RFID tags used
 - Version: 1.2.0
 - License: CC BY-NC-SA 4.0
 
+## Project status
+
+BoxRFID is currently **not under active development**. The existing source code and releases remain available, but I do not plan regular feature development for this project at the moment.
+
+You are welcome to use the sources under the terms of the license to create bug fixes, improvements, or further development in your own fork. If you publish a fork and would like it to be linked here, please send an email to **boxrfid@tinkerbarn.de** with a short description of your fork and the repository link.
+
     *## Alternative: Simple Python version for ACR122U*
     
     *If the Electron version does not start properly on your Windows system, there is also a very simple alternative Python-based version available.*
@@ -272,4 +278,7 @@ package.json
 
 ## License
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).
+
+Forks and derived versions are welcome as long as the license terms are respected. If you maintain a public fork with bug fixes or further development, feel free to send a short description and link to **boxrfid@tinkerbarn.de** so it can be considered for linking from this README.
+
 For commercial licensing, contact: boxrfid@tinkerbarn.de.
